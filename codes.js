@@ -212,6 +212,11 @@ btn.addEventListener("click", async(evt)=>{
   const URL = `${baseurl}from=${fromCurr.value}&to=${toCurr.value}`
   let response = await fetch(URL)
   let data = await response.json()
+
+      if (!data.rates || !data.rates[toCurr.value]) {
+    msg.innerText = "Conversion failed. Currency not supported.";
+    return;
+  }
   let rate = data.rates[toCurr.value]
   // console.log(rate)
 
